@@ -7,6 +7,7 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -36,10 +37,13 @@ public class HellResourceTest {
 	 
 	
 	
-	  @Test public void testStudentJson()throws Exception{ 
+	  @Test 
+	  public void testStudentJson()throws Exception{ 
 		  
 	  mockMvc =  MockMvcBuilders.standaloneSetup(helloResource).build();
-	  mockMvc.perform(get("/student"))
+	  mockMvc.perform(get("/student")
+			  .accept(MediaType.APPLICATION_JSON))
+	 
 	  .andExpect(MockMvcResultMatchers.status().isOk())
 	  .andExpect(jsonPath("$.name", Matchers.is("abdul"))); }
 	 
